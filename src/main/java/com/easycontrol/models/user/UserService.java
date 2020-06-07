@@ -23,5 +23,16 @@ public class UserService extends AbstractService<User, UUID> {
 		return userRepository.search(searchTerm, pageable);
 	}
 
+	public String login(User user) {
+		if (loginMatch(user)) {
+			String hash = "";
+		}
+		return "no match";
+	}
+
+	private boolean loginMatch(User user) {
+		return userRepository.loginMatch(user.getEmail(), user.getPassword());
+	}
+
 
 }

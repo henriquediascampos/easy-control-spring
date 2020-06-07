@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import com.easycontrol.models.abstracts.AbstractEntity;
 
+import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,10 +46,10 @@ public class User extends AbstractEntity {
         this.name = name;
     }
     // @JoinColumn(
-        // name = "family_uuid",
-        // foreignKey = @ForeignKey(name="user_fami_fk"))
+    //     name = "family_uuid",
+    //     foreignKey = @ForeignKey(name="user_fami_fk"))
     // @ManyToOne(fetch = FetchType.LAZY)
-    // @Basic(fetch = FetchType.LAZY)
+    // // @Basic(fetch = FetchType.LAZY)
     // private Family family;
 
 }

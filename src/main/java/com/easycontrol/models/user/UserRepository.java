@@ -23,4 +23,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("select c.name FROM User c")
     Page<User> search(@Param("searchTerm") String searchTerm, Pageable pageable);
 
+
+    @Query("select count(uuid) = 1 FROM User where email = :email and password = :password")
+	boolean loginMatch(String email, String password);
+    
+
 }

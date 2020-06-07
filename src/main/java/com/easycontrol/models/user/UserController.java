@@ -23,7 +23,7 @@ public class UserController {
 
     @Autowired UserService userService;
 
-    @PostMapping(path = "/user" )
+    @PostMapping(path = "/user/save" )
     public @ResponseBody User teste(@RequestBody User user) {
         System.out.println(user.toString());
         User user_ = new User();
@@ -34,6 +34,12 @@ public class UserController {
         user_.setExclude(false);
         user_.setCreatedAt(ZonedDateTime.now(ZoneOffset.ofHours(-3)));
         return userService.save(user_);
+    }
+
+    @PostMapping(path = "/user/login")
+    public @ResponseBody String login(@RequestBody User user) {
+        System.out.println(user.toString());
+        return userService.login(user);
     }
 
     @GetMapping(path = "/user/teste1")
