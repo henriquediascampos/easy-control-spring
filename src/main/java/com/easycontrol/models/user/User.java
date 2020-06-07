@@ -14,10 +14,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.easycontrol.models.abstracts.AbstractEntity;
-import com.easycontrol.models.family.Family;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_app")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User extends AbstractEntity {
 
     @Id
@@ -32,64 +40,14 @@ public class User extends AbstractEntity {
     @NotNull
     private String password;
 
-    @JoinColumn(
-        name = "family_uuid",
-        foreignKey = @ForeignKey(name="user_fami_fk"))
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Family family;
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    User(String name) {
         this.name = name;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Family getFamily() {
-        return family;
-    }
-
-    public void setFamily(Family family) {
-        this.family = family;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "User [email=" + email + ", family=" + family + ", lastName=" + lastName + ", name=" + name
-                + ", password=" + password + ", uuid=" + uuid + "]";
-    }
+    // @JoinColumn(
+        // name = "family_uuid",
+        // foreignKey = @ForeignKey(name="user_fami_fk"))
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @Basic(fetch = FetchType.LAZY)
+    // private Family family;
 
 }

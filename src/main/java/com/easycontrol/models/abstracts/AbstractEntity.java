@@ -6,7 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.ComponentScan;
+
+import lombok.Getter;
+import lombok.Setter;
+
 @MappedSuperclass
+@ComponentScan
+@Getter @Setter
 public abstract class AbstractEntity {
 
     @NotNull
@@ -15,32 +22,7 @@ public abstract class AbstractEntity {
     @NotNull
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private ZonedDateTime createdAt;
-
+    @Column
     private ZonedDateTime updatedAt;
-
-    public Boolean getExclude() {
-        return exclude;
-    }
-
-    public void setExclude(Boolean exclude) {
-        this.exclude = exclude;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
 
 }
