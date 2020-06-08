@@ -23,6 +23,11 @@ public class UserController {
 
     @Autowired UserService userService;
 
+    @GetMapping(path = "/")
+    public @ResponseBody String barra() {
+        return "serviço online";
+    }
+
     @PostMapping(path = "/user/save" )
     public @ResponseBody User teste(@RequestBody User user) {
         System.out.println(user.toString());
@@ -36,13 +41,13 @@ public class UserController {
         return userService.save(user_);
     }
 
-    @PostMapping(path = "/user/login")
+    @PostMapping(path = "/login")
     public @ResponseBody String login(@RequestBody User user) {
         System.out.println(user.toString());
         return userService.login(user);
     }
 
-    @GetMapping(path = "/user/teste1")
+    @GetMapping(path = "/teste")
     public @ResponseBody List<UserDto> teste() {
         User user_ = new User();
         user_.setName("name");
