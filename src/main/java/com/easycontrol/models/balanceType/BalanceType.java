@@ -1,4 +1,4 @@
-package com.easycontrol.models.family;
+package com.easycontrol.models.balanceType;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,11 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.easycontrol.models.abstracts.AbstractEntity;
+import com.easycontrol.models.family.Family;
 import com.easycontrol.models.user.User;
 
 import lombok.AllArgsConstructor;
@@ -20,27 +21,34 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "tb_family")
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Family extends AbstractEntity {
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "tb_balace_type")
+public class BalanceType extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotNull
-    private String name;
-    private String email;
+    private String type;
+    @NotNull
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        foreignKey =  @ForeignKey(name = "baty_user_fk")
+    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @JoinColumn(
-        name = "user_root_id",
+        name = "family_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fami_user_root_fk")
+        foreignKey =  @ForeignKey(name = "baty_fami_fk")
     )
-    @OneToOne(fetch = FetchType.LAZY)
-    private User userRoot;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Family family;
 }

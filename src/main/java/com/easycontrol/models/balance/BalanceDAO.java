@@ -1,7 +1,6 @@
 package com.easycontrol.models.balance;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public class BalanceDAO extends AbstractDAO<Balance, UUID> {
+public class BalanceDAO extends AbstractDAO<Balance, Long> {
 
     @Autowired
     public BalanceDAO(EntityManager em) {

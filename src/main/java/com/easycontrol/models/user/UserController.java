@@ -41,12 +41,6 @@ public class UserController {
         return userService.save(user_);
     }
 
-    @PostMapping(path = "/login")
-    public @ResponseBody String login(@RequestBody User user) {
-        System.out.println(user.toString());
-        return userService.login(user);
-    }
-
     @GetMapping(path = "/teste")
     public @ResponseBody List<UserDto> teste() {
         User user_ = new User();

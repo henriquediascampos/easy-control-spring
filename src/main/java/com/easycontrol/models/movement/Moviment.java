@@ -1,5 +1,9 @@
-package com.easycontrol.models.user;
+package com.easycontrol.models.movement;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -13,6 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import com.easycontrol.models.abstracts.AbstractEntity;
 import com.easycontrol.models.family.Family;
+import com.easycontrol.models.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,32 +25,41 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "user_app")
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class User extends AbstractEntity {
+@AllArgsConstructor
+@Builder
+@EqualsAndHashCode(callSuper = false)
+@Entity
+@Table(name = "tb_moviment")
+public class Moviment extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotNull
-    private String name;
+    @Column(precision = 10, scale = 10)
+    private BigDecimal value;
     @NotNull
-    private String lastName;
+    private LocalDate movementAt;
+
     @NotNull
-    private String email;
+    private Boolean itsRetroactive;
+
     @NotNull
-    private String password;
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        foreignKey =  @ForeignKey(name = "movi_user_fk")
+    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @JoinColumn(
         name = "family_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name="user_fami_fk"))
+        foreignKey =  @ForeignKey(name = "movi_fami_fk")
+    )
     @ManyToOne(fetch = FetchType.LAZY)
     private Family family;
-
 }

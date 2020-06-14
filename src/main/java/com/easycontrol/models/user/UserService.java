@@ -1,7 +1,6 @@
 package com.easycontrol.models.user;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.easycontrol.models.abstracts.AbstractService;
 
@@ -11,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService extends AbstractService<User, UUID> {
+public class UserService extends AbstractService<User, Long> {
 
     @Autowired private UserRepository userRepository;
 
@@ -23,14 +22,7 @@ public class UserService extends AbstractService<User, UUID> {
 		return userRepository.search(searchTerm, pageable);
 	}
 
-	public String login(User user) {
-		if (loginMatch(user)) {
-			String hash = "";
-		}
-		return "no match";
-	}
-
-	private boolean loginMatch(User user) {
+	public User loginMatch(User user) {
 		return userRepository.loginMatch(user.getEmail(), user.getPassword());
 	}
 

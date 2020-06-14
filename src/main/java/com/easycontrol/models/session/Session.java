@@ -1,13 +1,16 @@
-package com.easycontrol.models.family;
+package com.easycontrol.models.session;
 
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,27 +23,39 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "tb_family")
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Family extends AbstractEntity {
-
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "tb_session")
+public class Session extends AbstractEntity {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
+    
     @NotNull
-    private String name;
-    private String email;
+    private UUID token;
 
+    @NotNull
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isLogged; 
+
+    private ZonedDateTime LogoutAt;
+
+    @ManyToOne
     @JoinColumn(
-        name = "user_root_id",
+        name = "user_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fami_user_root_fk")
+        foreignKey = @ForeignKey(name = "sess_user_fk")
     )
-    @OneToOne(fetch = FetchType.LAZY)
-    private User userRoot;
+    private User user;
+
+
+    Session(UUID token, User user) {
+        this.token = token;
+        this.user = user;
+    }
 }
