@@ -15,8 +15,6 @@ import javax.validation.constraints.NotNull;
 
 import com.easycontrol.models.abstracts.AbstractEntity;
 
-import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
