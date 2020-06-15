@@ -14,13 +14,16 @@ public class SessionService extends AbstractService<User, Long> {
 
     @Autowired
     private SessionDAO sessionDAO;
+    // @Autowired(required = false)
+    // private UserService userService;
     // @Autowired
+
     // private SessionRepository sessionRepository;
-    @Autowired
-    private UserService userService;
+
 
 	public Session login(User user) {
-        User user_ = userService.loginMatch(user);
+        // User user_ = userService.loginMatch(user);
+        User user_ = new User();
         return createSession(user_);
 	}
 

@@ -23,7 +23,7 @@ public class UserService extends AbstractService<User, Long> {
 	}
 
 	public User loginMatch(User user) {
-		return userRepository.loginMatch(user.getEmail(), user.getPassword());
+		return new User(); //userRepository.loginMatch(user.getEmail(), user.getPassword());
 	}
 
 
