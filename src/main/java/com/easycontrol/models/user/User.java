@@ -38,6 +38,7 @@ public class User extends AbstractEntity {
     private String lastName;
     @NotNull
     private String email;
+    private Boolean verifieEmail;
     @NotNull
     private String password;
 

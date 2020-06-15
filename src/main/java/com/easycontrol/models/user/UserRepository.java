@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> search(@Param("searchTerm") String searchTerm, Pageable pageable);
 
 
-    @Query("select user.* FROM user where email = :email and password = :password")
+    @Query("select c.* FROM user c where email = :email and password = :password")
 	User loginMatch(String email, String password);
     
 

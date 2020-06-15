@@ -1,6 +1,8 @@
 package com.easycontrol.models.balanceType;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -34,7 +36,9 @@ public class BalanceType extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotNull
-    private String type;
+    private String describle;
+    @Enumerated(EnumType.STRING)
+    private EtypeBalance type;
     @NotNull
     @JoinColumn(
         name = "user_id",

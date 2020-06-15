@@ -14,8 +14,8 @@ public class SessionService extends AbstractService<User, Long> {
 
     @Autowired
     private SessionDAO sessionDAO;
-    @Autowired
-    private SessionRepository sessionRepository;
+    // @Autowired
+    // private SessionRepository sessionRepository;
     @Autowired
     private UserService userService;
 

@@ -1,5 +1,6 @@
 package com.easycontrol.models.family;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -34,7 +35,10 @@ public class Family extends AbstractEntity {
     private Long id;
     @NotNull
     private String name;
+    
     private String email;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean verifieEmail;
 
     @JoinColumn(
         name = "user_root_id",
